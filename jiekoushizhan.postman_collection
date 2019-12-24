@@ -1,0 +1,2274 @@
+{
+	"info": {
+		"_postman_id": "f3af9546-b6f6-4515-a068-0d313c1d11fe",
+		"name": "接口项目实战1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1.获取用户信息成功",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9692fce3-504a-4a8e-8c30-1e9961e21d0b",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===200\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"id为1\"]=jsonData.id===\"1\"\r",
+							"\r",
+							"tests[\"验证名字为小明\"]=jsonData.name===\"小明\"\r",
+							"\r",
+							"tests[\"年龄18岁\"]=jsonData.age===18\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Userid",
+						"value": "1",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/getuser?userid=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getuser"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.请求-- 获取不存在的用户信息",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b054dc13-e656-4b4b-943d-3763bf6d8bbc",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===500\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"没有这个用户\"]=jsonData.msg===\"没有这个用户\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "userid",
+						"value": "2",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/getuser?userid=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getuser"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.GET请求-- 不传递参数",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "048475a7-cb8b-48f3-ad4d-4c90b01cb6e4",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===200\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"id为1\"]=jsonData.id===1\r",
+							"\r",
+							"tests[\"验证名字为小明\"]=jsonData.name===\"小明\"\r",
+							"\r",
+							"tests[\"年龄18岁\"]=jsonData.age===18"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/getuser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.GET请求-- 传递参数为负数",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ccf7e182-2811-4abf-80e5-6555e718e579",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===500\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"没有这个用户\"]=jsonData.msg===\"没有这个用户\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/getuser?userid=-1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getuser"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "-1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5.GET请求-- 传递参数为违法字符",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7de64cf4-512f-4cc7-8972-a3962c564751",
+						"exec": [
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为500\"] = responseCode.code === 500;\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/getuser?userid=admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getuser"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "admin"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6.POST请求-- 获取用户信息 成功",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7cfa5360-150a-4ae0-b468-dfd8de90b791",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===200\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"id为1\"]=jsonData.id===\"1\"\r",
+							"\r",
+							"tests[\"验证名字为小明\"]=jsonData.name===\"小明\"\r",
+							"\r",
+							"tests[\"年龄18岁\"]=jsonData.age===18\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "userid",
+						"value": "1",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userid",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/getuser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7.POST请求-- 获取不存在的用户信息",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6787fe1b-aaf4-4fd7-ab84-17085d0eec12",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===500\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"没有这个用户\"]=jsonData.msg===\"没有这个用户\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "userid",
+						"value": "2",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userid",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/getuser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "8.POST请求-- 不传递参数",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "66f0aad5-2389-49bc-b575-a15bd08aab5c",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===200\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"id为1\"]=jsonData.id===1\r",
+							"\r",
+							"tests[\"验证名字为小明\"]=jsonData.name===\"小明\"\r",
+							"\r",
+							"tests[\"年龄18岁\"]=jsonData.age===18"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:8081/getuser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "9.POST请求-- 传递参数为负数",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "32024861-fa03-4ef8-bf6b-b17ed7ce1b9d",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===500\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"没有这个用户\"]=jsonData.msg===\"没有这个用户\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userid",
+							"value": "-1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/getuser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10.POST请求-- 传递参数为违法字符",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2ae8ab6d-9274-4123-90c8-0f10a9848235",
+						"exec": [
+							"/*检查响应状态码是否正常*/\r",
+							"tests[\"协议状态码为500\"] = responseCode.code === 500;\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userid",
+							"value": "admin",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/getuser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11.POST请求-- 一个较大的值",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e61b4ec7-a039-4d8f-b501-bf1de849cbf2",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===500\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"没有这个用户\"]=jsonData.msg===\"没有这个用户\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userid",
+							"value": "100000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/getuser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "12.GET请求-- 成功获取用户信息(添加请求头)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8acf03a8-eaec-412a-9b25-8149b4f726ba",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码正常\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===200\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"id为1\"]=jsonData.id===\"1\"\r",
+							"\r",
+							"tests[\"验证名字为小明\"]=jsonData.name===\"小明\"\r",
+							"\r",
+							"tests[\"年龄18岁\"]=jsonData.age===18\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/getuser2?userid=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getuser2"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "13.GET请求-- 不传Header",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c790c2e8-fb29-4508-9e65-9334f9b42c01",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===500\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"请设置Content-Type为application/json\"]=jsonData.msg===\"请设置Content-Type为application/json\"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/getuser2?userid=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getuser2"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "14.GET请求-- Header传递错误",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8acf03a8-eaec-412a-9b25-8149b4f726ba",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===500\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"请设置Content-Type为application/json\"]=jsonData.msg===\"请设置Content-Type为application/json\"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/JSON123"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/getuser2?userid=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getuser2"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "15.GET请求-- 不传userid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "549b78a1-e1eb-489b-ac22-a378f5918a0d",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===200\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"id为1\"]=jsonData.id===1\r",
+							"\r",
+							"tests[\"验证名字为小明\"]=jsonData.name===\"小明\"\r",
+							"\r",
+							"tests[\"年龄18岁\"]=jsonData.age===18"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/getuser2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getuser2"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "16.GET请求-- userid不存在",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6a53243c-ec75-4010-a60a-553953a14e88",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===500\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"没有这个用户\"]=jsonData.msg===\"没有这个用户\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/getuser2?userid=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getuser2"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "17.POST请求-- 成功获取用户余额",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "05127427-0dd6-4501-8ccc-cd93a62e5df1",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===200\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"userid为1\"]=jsonData.userid===1\r",
+							"\r",
+							"tests[\"money=1000\"]=jsonData.money===1000\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"userid\": 1\r\n\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/getmoney",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getmoney"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "18.POST请求-- 入参非JSON格式",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c21a3e54-7c42-4445-9434-3a83cf2879e9",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===500\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"参数错误\"]=jsonData.msg===\"参数错误\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userid",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/getmoney",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getmoney"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "19.POST请求-- 入参错误",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bf1a9deb-e97b-462a-bf1b-fe8b5f2e0943",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===500\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"没有这个用户\"]=jsonData.msg===\"没有这个用户\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"userid\": 2\r\n\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/getmoney",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getmoney"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "20.POST请求-- 无入参",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4ad93a27-79a0-4a59-84e7-f88131ac2655",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===500\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"参数错误\"]=jsonData.msg===\"参数错误\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/getmoney",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getmoney"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "21.POST请求-- 入参非法",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0eeda675-9e9f-4784-87b1-5efcd7fec493",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===500\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"参数错误\"]=jsonData.msg===\"参数错误\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"userid\": “admin”\r\n\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/getmoney",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getmoney"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "22.GET请求-- 无法获取用户余额",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3ebef063-8c48-4a9a-bf3a-6c62fa4c26b6",
+						"exec": [
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为405\"] = responseCode.code === 405;\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/getmoney?userid=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getmoney"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "23.POST请求-- 成功修改用户余额",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "845f03db-a106-4977-993b-f587858fab92",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码正常\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===200\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"修改余额成功\"]=jsonData.success===\"成功\"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userid",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "200",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/setmoney",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"setmoney"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "24.POST请求-- 无HTTP权限验证",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c2bcd1c8-4a96-41f4-b693-d0372be9e986",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===500\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"需要认证\"]=jsonData.msg===\"需要认证\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userid",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "200",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/setmoney",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"setmoney"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "25.POST请求-- 有HTTP权限验证，但密码错误",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a213943e-3916-4fe0-ae68-052cca5886fb",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===500\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"认证失败\"]=jsonData.msg===\"认证失败\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "111111",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userid",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "200",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/setmoney",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"setmoney"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "26.POST请求-- 权限确认正确，但userid非法",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6fb9b83a-d946-48f4-a4aa-37cd4fdac80c",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===500\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"没有这个用户败\"]=jsonData.msg===\"没有这个用户\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userid",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "200",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/setmoney",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"setmoney"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "27.POST请求-- 权限验证正确，userid正确，money非法",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2523f01b-27e1-4c9b-ac66-ed951b0999c4",
+						"exec": [
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为500\"] = responseCode.code === 500;\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userid",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "900.9",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/setmoney",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"setmoney"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "28.GET请求-- 无法修改用户余额",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d67f0f47-9ab1-4237-b32e-76c33b084d99",
+						"exec": [
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为405\"] = responseCode.code === 405;\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/setmoney?userid=1&money=900",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"setmoney"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "1"
+						},
+						{
+							"key": "money",
+							"value": "900"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "29.POST请求-- 成功修改用户余额",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f930fb2a-2a13-43d9-a11a-af350a67f9a4",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码正常\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===200\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"修改余额成功\"]=jsonData.success===\"成功\"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "cookie",
+						"value": "token=token12345",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userid",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "900",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/setmoney2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"setmoney2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "29-2.POST请求-- 成功修改用户余额为1000",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f930fb2a-2a13-43d9-a11a-af350a67f9a4",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码正常\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===200\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"修改余额成功\"]=jsonData.success===\"成功\"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "cookie",
+						"value": "token=token12345",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userid",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/setmoney2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"setmoney2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "30.POST请求-- 无Cookie",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a0fde739-c008-4bc1-adde-30a2af7af838",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===500\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"需要认证\"]=jsonData.msg===\"需要认证\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userid",
+							"value": "1\n",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "900\n",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/setmoney",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"setmoney"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "31.POST请求-- Cookies错误",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7be605a8-f00b-4a5a-b5cf-ea283a9bc813",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===500\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"cookie非法\"]=jsonData.msg===\"cookie非法\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "cookie",
+						"value": "token=token1111",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userid",
+							"value": "1\n",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "900",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/setmoney2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"setmoney2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "32.POST请求-- 用户id非法",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9135c82b-623f-4452-8732-a5d2508852e5",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为200\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===500\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"没有这个用户败\"]=jsonData.msg===\"没有这个用户\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "cookie",
+						"value": "token=token12345",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userid",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "900",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/setmoney2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"setmoney2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "33.POST请求-- money非法",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "53040241-81b2-4277-931e-ce41b1f4f35a",
+						"exec": [
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为500\"] = responseCode.code === 500;\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "cookie",
+						"value": "token=token12345",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userid",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "money",
+							"value": "900.9",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/setmoney2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"setmoney2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "34.GET请求-- 无法修改用户余额",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6ed6b4eb-8290-4656-bef8-428eed0d209d",
+						"exec": [
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为405\"] = responseCode.code === 405;\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/setmoney2?userid=1&money=900",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"setmoney2"
+					],
+					"query": [
+						{
+							"key": "userid",
+							"value": "1"
+						},
+						{
+							"key": "money",
+							"value": "900"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "35.POST请求-- 上传txt文件",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ad7e86ea-a959-4c34-bf37-0871f6719931",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码正常\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===200\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"上传txt文件成功\"]=jsonData.success===\"成功\"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Public/Pictures/Sample Pictures/1.txt"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/uploadfile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"uploadfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "36.POST请求-- 上传doc文件",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e168451d-33d6-4164-ad9b-583216b0ba0f",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码正常\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===200\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"上传doc文件成功\"]=jsonData.success===\"成功\"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Public/Pictures/Sample Pictures/1.doc"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/uploadfile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"uploadfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "37.POST请求-- 上传jpg文件",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7a07d9ac-e0ea-42e9-8671-be99679f48f9",
+						"exec": [
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码为500\"] = responseCode.code === 500;\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Public/Pictures/Sample Pictures/1.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/uploadfile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"uploadfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "38.POST请求-- 上传中文文件",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a834b483-5d21-44a0-838e-6398a9014251",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)\r",
+							"\r",
+							"\r",
+							"/*检查响应状态码是否为200*/\r",
+							"tests[\"协议状态码正常\"] = responseCode.code === 200;\r",
+							"\r",
+							"/*验证业务状态码*/\r",
+							"tests[\"验证业务状态码\"]=jsonData.code===200\r",
+							"\r",
+							"/*验证具体的值*/\r",
+							"tests[\"上传txt文件成功\"]=jsonData.success===\"成功\"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Public/Pictures/Sample Pictures/中文.txt"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/uploadfile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"uploadfile"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
