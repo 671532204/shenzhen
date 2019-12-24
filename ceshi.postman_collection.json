@@ -45,10 +45,13 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8081/getuser?userid=1",
+					"raw": "http://192.168.1.19:8081/getuser?userid=1",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"192",
+						"168",
+						"1",
+						"19"
 					],
 					"port": "8081",
 					"path": [
